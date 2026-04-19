@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-noir-900 bg-white antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+/* ─── Components ────────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-noir-900 text-white font-sans font-medium
+           px-6 py-3 text-sm tracking-wide uppercase
+           hover:bg-noir-800 active:bg-noir-950
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2
+           bg-gold-500 text-white font-sans font-medium
+           px-6 py-3 text-sm tracking-wide uppercase
+           hover:bg-gold-600 active:bg-gold-700
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           border border-noir-900 text-noir-900 font-sans font-medium
+           px-6 py-3 text-sm tracking-wide uppercase
+           hover:bg-noir-900 hover:text-white
+           transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           text-noir-600 font-sans font-medium
+           px-4 py-2 text-sm
+           hover:text-noir-900 hover:bg-noir-50
+           transition-all duration-200;
+  }
+
+  /* Inputs */
+  .input-field {
+    @apply w-full border border-noir-200 bg-white
+           px-4 py-3 font-sans text-sm text-noir-900
+           placeholder:text-noir-400
+           focus:outline-none focus:border-noir-900 focus:ring-0
+           transition-colors duration-200;
+  }
+
+  .input-label {
+    @apply block text-xs font-medium uppercase tracking-widest text-noir-500 mb-2;
+  }
+
+  /* Cards */
+  .product-card {
+    @apply relative bg-white overflow-hidden cursor-pointer;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply bg-gradient-to-r from-noir-100 via-noir-50 to-noir-100
+           bg-[length:200%_100%] animate-shimmer;
+  }
+
+  /* Page container */
+  .container-site {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section title */
+  .section-title {
+    @apply font-display text-3xl md:text-4xl text-noir-900 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-xs uppercase tracking-[0.2em] text-gold-500 font-sans font-medium mb-3;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 text-xs font-medium uppercase tracking-wider;
+  }
+
+  .badge-gold {
+    @apply badge bg-gold-100 text-gold-700;
+  }
+
+  .badge-noir {
+    @apply badge bg-noir-900 text-white;
+  }
+
+  /* Divider */
+  .divider-gold {
+    @apply w-12 h-0.5 bg-gold-400;
+  }
+}
+
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cart drawer overlay */
+.cart-overlay {
+  backdrop-filter: blur(4px);
+}

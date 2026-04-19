@@ -1,0 +1,90 @@
+// This is the Prisma schema for Aurelius E-Commerce
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  nameEn      String   @default("")
+  nameFr      String   @default("")
+  nameEs      String   @default("")
+  description String   @db.Text
+  descriptionEn String  @default("") @db.Text
+  descriptionFr String  @default("") @db.Text
+  descriptionEs String  @default("") @db.Text
+  price       Float
+  images      String[] // Array of image URLs/paths
+  category    Category
+  gender      Gender
+  stock       Int      @default(0)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  OrderItem   OrderItem[]
+}
+
+model Order {
+  id           String      @id @default(uuid())
+  customerName String
+  phone        String
+  address      String
+  city         String
+  status       OrderStatus @default(PENDING)
+  total        Float
+  items        OrderItem[]
+  notes        String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float   // Price at time of purchase
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // bcrypt hashed
+  name      String
+  createdAt DateTime @default(now())
+}
+
+enum Category {
+  RINGS
+  NECKLACES
+  BRACELETS
+  EARRINGS
+  WATCHES
+  BAGS
+  BELTS
+  SUNGLASSES
+  OTHER
+}
+
+enum Gender {
+  MEN
+  WOMEN
+  UNISEX
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}

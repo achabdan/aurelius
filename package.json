@@ -1,0 +1,16 @@
+{
+  "name": "aurelius-ecommerce",
+  "version": "1.0.0",
+  "description": "Aurelius — Luxury Jewelry & Accessories E-Commerce (Full Stack)",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "setup": "cd backend && cp .env.example .env && npx prisma generate && npx prisma migrate dev --name init && node src/prisma/seed.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
